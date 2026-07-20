@@ -11,21 +11,8 @@ export const metadata: Metadata = {
   description: 'Mechanical Engineering student at Washington University in St. Louis. Specializing in avionics, rocketry, and control systems.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/HarshLogo.png',
+    apple: '/HarshLogo.png',
   },
 }
 
