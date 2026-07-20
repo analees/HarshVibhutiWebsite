@@ -32,7 +32,7 @@ const experiences = [
     role: "STEM Education and Program Management Intern",
     location: "Austin, TX",
     date: "Jun 2024 – Aug 2024",
-    image: "/images/IDTech.jpg",
+    image: "/images/idtech.jpg",
     description:
       "Utilized Instructional design, technical communication, and problem-solving to lead a Robotics course on BattleBots, simplifying complex mechanical engineering concepts for diverse learners.",
     tags: ["Python", "Machine Learning", "AI", "Education"],
