@@ -1,4 +1,5 @@
 import os
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -10,26 +11,50 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 
 BASE_DIR = Path(__file__).resolve().parent
-CHROMA_DIR = BASE_DIR / "chroma_db"
+CHROMA_DIR = Path(os.getenv("CHROMA_DIR", str(BASE_DIR / "chroma_db")))
 COLLECTION_NAME = "harsh_portfolio"
 
 load_dotenv(BASE_DIR / ".env")
 
-app = FastAPI()
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000"
+    ).split(",")
+    if origin.strip()
+]
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    needs_index = not CHROMA_DIR.exists() or not any(CHROMA_DIR.iterdir())
+    rebuild_requested = os.getenv("REBUILD_CHROMA", "false").lower() == "true"
+    if needs_index or rebuild_requested:
+        from ingest import main as ingest_documents
+
+        ingest_documents()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=False,
     allow_methods=["GET"],
     allow_headers=["*"],
 )
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-vector_store = Chroma(
-    collection_name=COLLECTION_NAME,
-    persist_directory=str(CHROMA_DIR),
-    embedding_function=OpenAIEmbeddings(model="text-embedding-3-small"),
-)
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+
+
+def get_vector_store() -> Chroma:
+    return Chroma(
+        collection_name=COLLECTION_NAME,
+        persist_directory=str(CHROMA_DIR),
+        embedding_function=embeddings,
+    )
 
 
 def format_context(documents) -> str:
@@ -71,7 +96,7 @@ def ask_ai(question: str):
             detail="Knowledge index is missing. Run python ingest.py first.",
         )
 
-    documents = vector_store.similarity_search(question, k=4)
+    documents = get_vector_store().similarity_search(question, k=4)
     context = format_context(documents)
 
     response = llm.invoke(

@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: harsh-portfolio-rag
+    runtime: python
+    region: oregon
+    plan: starter
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    autoDeployTrigger: commit
+    disk:
+      name: chroma-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: CHROMA_DIR
+        value: /var/data/chroma_db
+      - key: REBUILD_CHROMA
+        value: "false"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false

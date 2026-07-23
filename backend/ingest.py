@@ -21,7 +21,8 @@ from langchain_text_splitters import (
 
 BASE_DIR = Path(__file__).resolve().parent
 KNOWLEDGE_DIR = BASE_DIR / "knowledge"
-CHROMA_DIR = BASE_DIR / "chroma_db"
+# Local development uses backend/chroma_db. Render overrides this with /var/data/chroma_db.
+CHROMA_DIR = Path(os.getenv("CHROMA_DIR", str(BASE_DIR / "chroma_db")))
 COLLECTION_NAME = "harsh_portfolio"
 
 
