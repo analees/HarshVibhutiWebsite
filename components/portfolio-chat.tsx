@@ -5,7 +5,7 @@ import { FormEvent, useEffect, useRef, useState } from "react"
 import { LoaderCircle, Send, X } from "lucide-react"
 
 
-const API_URL = process.env.NEXT_PUBLIC_RAG_API_URL ?? "http://127.0.0.1:8000"
+const API_URL = process.env.NEXT_PUBLIC_RAG_API_URL
 
 type ChatMessage = {
   role: "assistant" | "user"
@@ -47,6 +47,9 @@ export function PortfolioChat() {
     setIsLoading(true)
 
     try {
+      if (!API_URL) {
+        throw new Error("NEXT_PUBLIC_RAG_API_URL is not configured.")
+      }
       const params = new URLSearchParams({ question: trimmedQuestion })
       const response = await fetch(`${API_URL}/ask?${params.toString()}`)
       if (!response.ok) throw new Error("The portfolio assistant is unavailable.")
