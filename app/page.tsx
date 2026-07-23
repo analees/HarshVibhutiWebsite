@@ -7,6 +7,7 @@ import { ResearchExperience } from "@/components/ui/ResearchExperience"
 import { SkillsSection } from "@/components/skills-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
+import { PortfolioChat } from "@/components/portfolio-chat"
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <SkillsSection />
       <ContactSection />
       <Footer />
+      <PortfolioChat />
     </main>
   )
 }
