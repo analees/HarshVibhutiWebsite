@@ -10,7 +10,7 @@ const experiences = [
     date: "May 2025 – Aug 2025",
     image: "/images/CAPCOG.jpg",
     description:
-      "Automated environmental-data workflows using Python, Selenium, and Pandas, reducing QA time by 95%.",
+      "Automated Texas-wide air-quality data collection with Python, reducing QA time by 95%, then presented findings and recommendations to 200+ regional stakeholders.",
     tags: ["Python", "Selenium", "Pandas", "Data Automation"],
   },
 

@@ -47,15 +47,15 @@ export function HeroSection() {
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed text-pretty">
-          I'm a Mechanical Engineering and Mathematics student at WashU with hands-on experience in precision component 
-          design, Machining, FEA, and process automation. I've built and iterated on hardware for rocketry and avionics systems, analyzed data for regional planning on sustainability
-          and automated data pipelines that delivered a <span className="text-primary">20x</span> throughput.
+          I'm a Mechanical Engineering and Mathematics student at WashU with hands-on experience in SolidWorks, GD&amp;T,
+          CNC machining, structural FEA, thermal CFD, and electromechanical prototyping. I design, manufacture, and validate
+          hardware for rocketry, avionics, robotics, and energy research.
           </p>
           
           <div className="flex flex-wrap gap-4 pt-4">
             <a
               href={RESUME_DOWNLOAD_URL}
-              download
+              download="Harsh Vibhuti - Mechanical Design Engineer.pdf"
               aria-label="Download resume"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity"
             >

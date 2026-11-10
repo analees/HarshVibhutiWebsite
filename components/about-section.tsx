@@ -43,9 +43,10 @@ export function AboutSection() {
               </p>
 
               <p>
-                My work spans flight avionics and a soil-sampling rocketry
-                payload, bulk-metallic-glass materials research, and Python
-                automation that reduced a regional agency's QA workload by 95%.
+                My work spans flight avionics, NASA USLI rocketry hardware,
+                an atomization chamber for methanol delivery, an autonomous
+                assistive robot, and Python automation that reduced a regional
+                agency's QA workload by 95%.
                 Across all of it I've learned to define problems clearly,
                 respect constraints, iterate through failure, and communicate
                 technical findings to people who don't speak engineering.
@@ -121,11 +122,11 @@ export function AboutSection() {
 
               <div className="flex justify-between items-start px-8 py-6 border-b">
                 <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                  Seeking
+                  Seeking 
                 </span>
 
                 <p className="text-right font-semibold">
-                  Engineering / Robotics Internship
+                  Engineering / Robotics Full Time Position
                 </p>
               </div>
 
